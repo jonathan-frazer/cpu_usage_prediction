@@ -23,15 +23,7 @@ Thumbs.db
 /models/
 
 
-# Ignore MLflow binary model artifacts
-mlruns/**/model.pkl
-mlruns/**/requirements.txt
-mlruns/**/python_env.yaml
-mlruns/**/conda.yaml
-mlruns/**/input_example.json
-mlruns/**/serving_input_example.json
-mlruns/**/artifacts/*
-mlruns/**/outputs/*
+mlruns/
 
 # Allow MLflow metadata
 !mlruns/**/meta.yaml
