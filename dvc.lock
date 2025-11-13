@@ -1,0 +1,66 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py data/raw.csv data/processed.csv
+    deps:
+    - path: data/raw.csv
+      hash: md5
+      md5: 448de498a9f801b2a2f00c733ae192f5
+      size: 310056916
+    - path: src/preprocess.py
+      hash: md5
+      md5: 01422bfdf06eeefd766369b2889b6004
+      size: 842
+    outs:
+    - path: data/processed.csv
+      hash: md5
+      md5: a58fe307df396f911b262aa2ab7e4912
+      size: 82511210
+  train:
+    cmd: python src/train.py data/processed.csv models/
+    deps:
+    - path: data/processed.csv
+      hash: md5
+      md5: a58fe307df396f911b262aa2ab7e4912
+      size: 82511210
+    - path: src/train.py
+      hash: md5
+      md5: f0503cc30d4df528a1a086bb27a502d8
+      size: 5312
+    outs:
+    - path: metrics/linear/metrics.json
+      hash: md5
+      md5: 8aedd374e4e68ee330ca3354f632285f
+      size: 300
+    - path: metrics/linear/residuals.png
+      hash: md5
+      md5: dcf0f69bc4b1cd680f69d93cddca4b7f
+      size: 30567
+    - path: metrics/rf/metrics.json
+      hash: md5
+      md5: f1d8e06411fe356c441482b9da211314
+      size: 293
+    - path: metrics/rf/residuals.png
+      hash: md5
+      md5: c49ad17072f00c3c450b5da0361add33
+      size: 52289
+    - path: metrics/xgb/metrics.json
+      hash: md5
+      md5: e08378cdcca487d9bfe316e7b686aee5
+      size: 294
+    - path: metrics/xgb/residuals.png
+      hash: md5
+      md5: 4bacdeca42e03a2f0820c16ce237aa3d
+      size: 47731
+    - path: models/linear_model.pkl
+      hash: md5
+      md5: 04a9e021764e72ddaf30e189c98cf6cc
+      size: 1200
+    - path: models/rf_model.pkl
+      hash: md5
+      md5: 39ea3184de78f51ad760a0b1c69bc0cf
+      size: 9194305
+    - path: models/xgb_model.pkl
+      hash: md5
+      md5: 5e899e0732f47e2bfc976b79fe9b8b59
+      size: 269003

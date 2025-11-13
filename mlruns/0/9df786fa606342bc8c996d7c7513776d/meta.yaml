@@ -1,0 +1,14 @@
+artifact_uri: file:///E:/Mini%20projects/mlflow/Q3/mlruns/0/9df786fa606342bc8c996d7c7513776d/artifacts
+end_time: 1763043102167
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9df786fa606342bc8c996d7c7513776d
+run_name: rf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763043101239
+status: 3
+tags: []
+user_id: Study
