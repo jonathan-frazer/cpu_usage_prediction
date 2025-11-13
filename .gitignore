@@ -17,28 +17,40 @@ Thumbs.db
 # VSCode
 .vscode/
 
-# Ignore large model artifacts
-models/*
-!models/*.dvc
+# -------------------------------
+# IGNORE ALL MODELS (PKL, MLflow)
+# -------------------------------
+models/
 
-# Ignore all metrics except tiny json metadata
-metrics/*/*
-!metrics/**/*.json
-metrics/**/*.png
-metrics/**/residuals.png
 
+# Ignore MLflow binary model artifacts
+mlruns/**/model.pkl
+mlruns/**/requirements.txt
+mlruns/**/python_env.yaml
+mlruns/**/conda.yaml
+mlruns/**/input_example.json
+mlruns/**/serving_input_example.json
+mlruns/**/artifacts/*
+mlruns/**/outputs/*
+
+# Allow MLflow metadata
+!mlruns/**/meta.yaml
+!mlruns/**/metrics/**
+!mlruns/**/params/**
+!mlruns/**/tags/**
+
+# --------------------------------
+# IGNORE METRICS IMAGES + JSON
+# --------------------------------
+metrics/
+# --------------------------------
 # DVC internal
+# --------------------------------
 .dvc/cache/
 .dvc/tmp/
 
+# --------------------------------
 # DVC tracked artifacts
+# --------------------------------
 data/*
 !data/*.dvc
-
-# MLflow artifacts
-mlruns/**/artifacts/*
-mlruns/**/outputs/*/*
-!mlruns/**/meta.yaml
-!mlruns/**/metrics/*
-!mlruns/**/params/*
-!mlruns/**/tags/*
