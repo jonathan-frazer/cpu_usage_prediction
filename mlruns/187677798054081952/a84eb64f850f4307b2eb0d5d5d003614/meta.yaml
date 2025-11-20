@@ -1,0 +1,14 @@
+artifact_uri: file:C:/MLOps/cpu_usage_prediction/mlruns/187677798054081952/a84eb64f850f4307b2eb0d5d5d003614/artifacts
+end_time: 1763644678314
+entry_point_name: ''
+experiment_id: '187677798054081952'
+lifecycle_stage: active
+run_id: a84eb64f850f4307b2eb0d5d5d003614
+run_name: rf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763644677506
+status: 3
+tags: []
+user_id: My PC

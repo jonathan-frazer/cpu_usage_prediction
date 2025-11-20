@@ -1,0 +1,14 @@
+artifact_uri: file:C:/MLOps/cpu_usage_prediction/mlruns/187677798054081952/6976a8e59a9c41dd8e0700651b115ca7/artifacts
+end_time: 1763645121344
+entry_point_name: ''
+experiment_id: '187677798054081952'
+lifecycle_stage: active
+run_id: 6976a8e59a9c41dd8e0700651b115ca7
+run_name: xgb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763645120475
+status: 3
+tags: []
+user_id: My PC

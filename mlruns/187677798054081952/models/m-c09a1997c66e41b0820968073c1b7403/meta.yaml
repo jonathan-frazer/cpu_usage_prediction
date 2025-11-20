@@ -1,0 +1,10 @@
+artifact_location: file:C:/MLOps/cpu_usage_prediction/mlruns/187677798054081952/models/m-c09a1997c66e41b0820968073c1b7403/artifacts
+creation_timestamp: 1763645026582
+experiment_id: '187677798054081952'
+last_updated_timestamp: 1763645028174
+model_id: m-c09a1997c66e41b0820968073c1b7403
+model_type: null
+name: model
+source_run_id: f45f016cf18e4c1f940012b811f16825
+status: 2
+status_message: null

@@ -1,0 +1,6 @@
+artifact_location: file:C:/MLOps/cpu_usage_prediction/mlruns/187677798054081952
+creation_time: 1763644616334
+experiment_id: '187677798054081952'
+last_update_time: 1763644616334
+lifecycle_stage: active
+name: cpu-usage-experiment
