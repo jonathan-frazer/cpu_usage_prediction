@@ -1,1 +1,1 @@
-https://manvip28-mlops-app-nkpcsx.streamlit.app/
+https://jonathan-frazer-mlops-app-nkpcsx.streamlit.app/

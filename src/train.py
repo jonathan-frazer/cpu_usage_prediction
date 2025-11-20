@@ -10,6 +10,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import joblib
 
 try:
     from xgboost import XGBRegressor
@@ -20,9 +21,10 @@ except ImportError:
 # -------------------------------
 # MLflow Remote Setup (DagsHub)
 # -------------------------------
-mlflow.set_tracking_uri("https://dagshub.com/manvip28/cpu-usage-mlops.mlflow")
+#mlflow.set_tracking_uri("https://dagshub.com/jonathan-frazer/cpu-usage-prediction.mlflow")
+#mlflow.set_experiment("cpu-usage-experiment")
+mlflow.set_tracking_uri("mlruns")
 mlflow.set_experiment("cpu-usage-experiment")
-
 
 def train_and_log(X_train, X_test, y_train, y_test, model, model_name, feature_name_type):
     model.fit(X_train, y_train)
@@ -84,7 +86,7 @@ def train_and_log(X_train, X_test, y_train, y_test, model, model_name, feature_n
         # -------- Log model to MLflow
         mlflow.sklearn.log_model(
             sk_model=model,
-            artifact_path="model",
+            name="model",
             input_example=X_train.head(1),
             pip_requirements=[
                 "scikit-learn",
@@ -94,10 +96,16 @@ def train_and_log(X_train, X_test, y_train, y_test, model, model_name, feature_n
             ]
         )
 
-        print(f"✔ Logged {model_name} to MLflow (DagsHub)")
+        # Save model to disk
+        model_output_dir = "models"
+        os.makedirs(model_output_dir, exist_ok=True)
+        model_path = os.path.join(model_output_dir, f"{model_name}_model.pkl")
+        joblib.dump(model, model_path)
+
+        print(f"Logged {model_name} to MLflow and saved to {model_path}")
 
 
-def train_all(data_path):
+def train_all(data_path, model_output_dir):
     df = pd.read_csv(data_path)
     X = df.drop("cpu_usage", axis=1)
     y = df["cpu_usage"]
@@ -126,8 +134,8 @@ def train_all(data_path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python train.py <data_path>")
+    if len(sys.argv) < 3:
+        print("Usage: python train.py <data_path> <model_output_dir>")
         sys.exit(1)
 
-    train_all(sys.argv[1])
+    train_all(sys.argv[1], sys.argv[2])

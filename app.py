@@ -9,8 +9,8 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 
 # Public DagsHub MLflow
-DAGSHUB_OWNER = "manvip28"
-DAGSHUB_REPO = "cpu-usage-mlops"
+DAGSHUB_OWNER = "jonathan-frazer"
+DAGSHUB_REPO = "cpu-usage-prediction"
 TRACKING_URI = f"https://dagshub.com/{DAGSHUB_OWNER}/{DAGSHUB_REPO}.mlflow"
 
 mlflow.set_tracking_uri(TRACKING_URI)
@@ -27,23 +27,24 @@ st.set_page_config(
     page_title="CPU Usage MLOps Dashboard",
     page_icon="🖥️",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
+    theme="light"
 )
 
 # Custom CSS
 st.markdown("""
 <style>
     .main {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: white;
     }
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
     }
     .stTabs [data-baseweb="tab"] {
-        background-color: rgba(255,255,255,0.1);
+        background-color: rgba(0,0,0,0.1);
         border-radius: 8px;
         padding: 10px 20px;
-        color: white;
+        color: black;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -98,17 +99,17 @@ def load_model(run_id):
 
 # -------- LOAD ARTIFACTS --------
 @st.cache_data
-def load_artifact_image(run_id, artifact_path):
+def load_artifact_image(run_id, name):
     """Download artifact from MLflow and return as PIL Image"""
     try:
         client = mlflow.MlflowClient()
         with tempfile.TemporaryDirectory() as tmpdir:
-            local_path = client.download_artifacts(run_id, artifact_path, tmpdir)
+            local_path = client.download_artifacts(run_id, name, tmpdir)
             with Image.open(local_path) as img:
                 img_copy = img.copy()
             return img_copy
     except Exception as e:
-        st.warning(f"Could not load {artifact_path} for run {run_id[:8]}: {e}")
+        st.warning(f"Could not load {name} for run {run_id[:8]}: {e}")
         return None
 
 # -------- FETCH ALL MODELS --------

@@ -12,4 +12,5 @@ stages:
     deps:
       - src/train.py
       - data/processed.csv
-    
+    outs:
+      - models/

@@ -50,3 +50,4 @@ data/*
 
 !mlruns/**/models/*.dvc
 
+/models

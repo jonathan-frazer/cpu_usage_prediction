@@ -2,9 +2,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Load model
-with open("models/xgb.pkl", "rb") as f:
+with open("models/xgb_model.pkl", "rb") as f:
     model = pickle.load(f)
 
 st.title("CPU Usage Prediction Dashboard")
@@ -31,7 +33,37 @@ mapping = {
 controller_value = mapping[controller_kind]
 
 # Prepare features for prediction
-features = np.array([[cpu_request, mem_request, cpu_limit, mem_limit, runtime_minutes, controller_value]])
+# Create a dictionary for the input parameters
+input_data = {
+    "cpu_request": [cpu_request],
+    "mem_request": [mem_request],
+    "cpu_limit": [cpu_limit],
+    "mem_limit": [mem_limit],
+    "runtime_minutes": [runtime_minutes],
+    "controller_kind": [controller_kind]  # Use the string label here
+}
+
+# Convert to DataFrame
+input_df = pd.DataFrame(input_data)
+
+# One-hot encode the 'controller_kind' column
+input_df = pd.get_dummies(input_df, columns=['controller_kind'], drop_first=True)
+
+# Ensure all expected one-hot encoded columns are present, fill with 0 if not
+expected_columns = [
+    "cpu_request", "mem_request", "cpu_limit", "mem_limit", "runtime_minutes",
+    "controller_kind_Job", "controller_kind_ReplicaSet",
+    "controller_kind_ReplicationController", "controller_kind_StatefulSet"
+]
+
+for col in expected_columns:
+    if col not in input_df.columns:
+        input_df[col] = 0
+
+# Reorder columns to match the training data
+input_df = input_df[expected_columns]
+
+features = input_df.values
 
 # Predict
 if st.sidebar.button("Predict CPU Usage"):
@@ -66,8 +98,7 @@ st.info("Model loaded from 'models/xgb.pkl'. Data version controlled with DVC.")
 
 st.header("Feature Importance")
 importance = model.feature_importances_
-feat_names = ["cpu_request", "mem_request", "cpu_limit", "mem_limit", "runtime_minutes", "controller_kind"]
-
+feat_names = ["cpu_request", "mem_request", "cpu_limit", "mem_limit", "runtime_minutes", "controller_kind_Job", "controller_kind_ReplicaSet", "controller_kind_ReplicationController", "controller_kind_StatefulSet"]
 fig3, ax3 = plt.subplots()
 sns.barplot(x=importance, y=feat_names, ax=ax3)
 st.pyplot(fig3)

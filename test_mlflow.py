@@ -1,7 +1,7 @@
 import mlflow
 
-DAGSHUB_OWNER = "manvip28"
-DAGSHUB_REPO = "cpu-usage-mlops"
+DAGSHUB_OWNER = "jonathan-frazer"
+DAGSHUB_REPO = "cpu-usage-prediction"
 TRACKING_URI = f"https://dagshub.com/{DAGSHUB_OWNER}/{DAGSHUB_REPO}.mlflow"
 
 mlflow.set_tracking_uri(TRACKING_URI)
