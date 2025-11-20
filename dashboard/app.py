@@ -73,27 +73,6 @@ if st.sidebar.button("Predict CPU Usage"):
 
 # Visualization Section
 st.header("Data Visualizations")
-
-uploaded_data = st.file_uploader("Upload processed.csv for analysis (optional)", type=["csv"])
-
-if uploaded_data:
-    df = pd.read_csv(uploaded_data)
-    st.subheader("Data Summary")
-    st.write(df.describe())
-
-    st.subheader("Correlation Heatmap")
-    import seaborn as sns
-    import matplotlib.pyplot as plt
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.heatmap(df.corr(), annot=True, cmap="coolwarm", ax=ax)
-    st.pyplot(fig)
-
-    st.subheader("CPU Usage Distribution")
-    fig2, ax2 = plt.subplots()
-    sns.histplot(df['cpu_usage'], kde=True, ax=ax2)
-    st.pyplot(fig2)
-
 st.info("Model loaded from 'models/xgb.pkl'. Data version controlled with DVC.")
 
 st.header("Feature Importance")

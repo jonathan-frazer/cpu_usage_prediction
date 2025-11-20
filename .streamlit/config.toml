@@ -1,0 +1,7 @@
+[theme]
+base = "light"
+backgroundColor = "#F0F8FF"  # Alice Blue
+secondaryBackgroundColor = "#292929"  # Dark Gray
+textColor = "#000000"  # Black
+primaryColor = "#4682B4"  # Steel Blue
+font = "monospace"
